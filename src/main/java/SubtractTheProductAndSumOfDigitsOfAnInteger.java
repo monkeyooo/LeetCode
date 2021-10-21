@@ -1,5 +1,9 @@
-//1281. Subtract the Product and Sum of Digits of an Integer
-class Solution {
+package src.main.java;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class SubtractTheProductAndSumOfDigitsOfAnInteger {
     public int subtractProductAndSum(int n) {
         int tmp = n;
         int i = 0;

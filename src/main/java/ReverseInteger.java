@@ -1,5 +1,8 @@
-//Reverse Integer
-class Solution {
+package src.main.java;
+
+
+//7
+public class ReverseInteger {
     public int reverse(int x) {
         int positive = 0;
         long tail = 0;

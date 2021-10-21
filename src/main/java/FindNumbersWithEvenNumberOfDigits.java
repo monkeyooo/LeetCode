@@ -1,5 +1,6 @@
-//1295. Find Numbers with Even Number of Digits
-class Solution {
+package src.main.java;
+
+public class FindNumbersWithEvenNumberOfDigits {
     public int findNumbers(int[] nums) {
         int ans = 0;
         for(int i = 0; i<nums.length; i++){

@@ -1,5 +1,6 @@
-1108. Defanging an IP Address
-class Solution {
+package src.main.java;
+
+public class DefangingAnIPAddress {
     public String defangIPaddr(String address) {
         String ans="";
         return address.replaceAll("\\.", "[.]");
