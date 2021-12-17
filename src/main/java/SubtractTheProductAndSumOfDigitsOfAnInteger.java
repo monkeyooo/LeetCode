@@ -9,14 +9,14 @@ public class SubtractTheProductAndSumOfDigitsOfAnInteger {
         int i = 0;
         int pod = 1;
         int sod = 0;
-        Map<Integer , Integer> map = new HashMap<Integer, Integer>();
-        while(tmp != 0){
-            map.put(i,tmp%10);
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        while (tmp != 0) {
+            map.put(i, tmp % 10);
             i++;
-            tmp = tmp/10;
+            tmp = tmp / 10;
         }
-        for (int j = 0 ; j <= i ;j++){
-            if(map.get(j) != null){
+        for (int j = 0; j <= i; j++) {
+            if (map.get(j) != null) {
                 pod = pod * map.get(j);
                 sod = sod + map.get(j);
             }
