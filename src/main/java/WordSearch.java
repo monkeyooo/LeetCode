@@ -1,7 +1,9 @@
 package src.main.java;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class WordSearch {
 
@@ -14,6 +16,8 @@ public class WordSearch {
     public boolean exist(char[][] board, String word) {
         fullArrange = new ArrayList<>();
         backtrack(board, "", word);
+        Queue<Integer> queue = new LinkedList<>();
+        queue.poll();
         System.out.println(fullArrange.toString());
         return fullArrange.contains(word);
     }
