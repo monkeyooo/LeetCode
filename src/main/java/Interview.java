@@ -17,9 +17,6 @@ public class Interview {
     Set<String> check;
     Map<String, Integer> map = new HashMap<>();
     public static void main(String[] args) {
-        System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", "1");
-        System.out.println("Parallelism: "+ ForkJoinPool.getCommonPoolParallelism());
-
 //        Set<Thread> threads = ConcurrentHashMap.newKeySet();
 //        List<Integer> src = new ArrayList<>();
 //        for (int i = 0; i < 10000; i++) {
@@ -40,6 +37,7 @@ public class Interview {
                 break;
             }
         }
+
 
 
         Interview interview = new Interview();
@@ -66,6 +64,82 @@ public class Interview {
 //                "munch"
 //                );
 //        System.out.println(interview.solution(3));
+        //....xxx...xx   n+1, n+1
+        int[] A = new int[]{16,16};
+
+        boolean[] used = new boolean[A.length];
+        List<List<Integer>> tracks = new ArrayList<>();
+        List<Integer> track = new ArrayList<>();
+        backtracking(used, 0, A, tracks, track);
+        System.out.println(countTracksResult(tracks));
+
+//        String s = "....xxx...xx";
+//        int produce = 5;
+//
+//        System.out.println(fixPotholes(s, produce));
+//        s ="...xxx..x....xxx";
+//        produce = 7;
+//        System.out.println(fixPotholes(s, produce));
+//        //...x..x..x..x
+//        s = "..xxxxx"; produce =  4;
+//        System.out.println(fixPotholes(s, produce));
+//        s = "x.x.xxx...x"; produce = 14;
+//        System.out.println(fixPotholes(s, produce));
+//        s = ".."; produce = 5;
+//        System.out.println(fixPotholes(s, produce));
+//        System.out.println(fixPotholes("..xx..xx..", produce));
+//        System.out.println(fixPotholes("..x..x..x..", produce));
+//        System.out.println(fixPotholes("......x..", produce));
+//        System.out.println(fixPotholes("......xxxxx.xxx..", produce));
+    }
+
+    private static void backtracking(boolean[] used, int index, int[] A, List<List<Integer>> tracks, List<Integer> track) {
+        if (!tracks.containsAll(track)) {
+            tracks.add(new ArrayList(track));
+            return;
+        }
+        for (int i = 0; i < A.length; i++) {
+            if (used[i]) {
+                continue;
+            }
+            track.add(A[i]);
+            used[i] = true;
+            backtracking(used, i, A, tracks, track);
+            used[i] = false;
+            track.remove(track.size() - 1);
+        }
+    }
+
+    private static int countTracksResult(List<List<Integer>> tracks) {
+        int res = 0;
+        for (int i = 0; i < tracks.size(); i++) {
+            int subAns = 1;
+            for (int j = 0; j < tracks.get(i).size(); j++) {
+                subAns = subAns & Integer.parseInt(Integer.toBinaryString(tracks.get(i).get(j)));
+            }
+            if (subAns > 0) res++;
+        }
+        return res;
+    }
+
+
+    private static int fixPotholes(String s, int consumes) {
+        if (consumes <= 1 || s == null || s.length() == 0) return 0;
+        var strings = s.split("\\.");
+        Arrays.sort(strings);
+        int fixPotholes = 0;
+        for (int i = strings.length - 1; i >= 0; i--) {
+            if (consumes <= 0) return fixPotholes;
+            if (!strings[i].equals("")) {
+                if (consumes > strings[i].length() + 1) {
+                    fixPotholes += strings[i].length();
+                } else {
+                    fixPotholes += (consumes - 1);
+                }
+                consumes = consumes - strings[i].length() - 1;
+            }
+        }
+        return fixPotholes;
     }
 
     private void test(String s) {
